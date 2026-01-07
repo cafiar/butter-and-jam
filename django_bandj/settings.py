@@ -42,6 +42,11 @@ ALLOWED_HOSTS = [
     'cabare-stocklist-bandj-64bab33316f2.herokuapp.com'
 ]
 
+# Add Render.com URL to allowed hosts
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+   ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 SITE_ID = 1
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'home'
