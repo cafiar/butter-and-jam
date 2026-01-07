@@ -27,9 +27,15 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.getenv('SECRET_KEY', 'sinixtro@14*17')
 
-SECRET_KEY = os.getenv('SECRET_KEY')
-if not SECRET_KEY:
-    raise ValueError("No SECRET_KEY set for Django application")
+# SECRET_KEY = os.getenv('SECRET_KEY')
+# if not SECRET_KEY:
+#    raise ValueError("No SECRET_KEY set for Django application")
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.getenv(
+    'SECRET_KEY',
+    'django-insecure-local-dev-only'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG', 'True') == 'True'
@@ -109,8 +115,17 @@ WSGI_APPLICATION = 'django_bandj.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+# }
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL not set")
+
 DATABASES = {
-   'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': dj_database_url.parse(DATABASE_URL)
 }
 
 # Password validation
